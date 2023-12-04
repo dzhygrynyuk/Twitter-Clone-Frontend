@@ -1,5 +1,14 @@
 import React from "react";
-import { makeStyles, Typography, Button } from "@material-ui/core";
+import { 
+    makeStyles, 
+    Typography, 
+    Button, 
+    Dialog, 
+    DialogTitle, 
+    DialogContent,
+    TextField,
+    DialogActions
+} from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
@@ -70,11 +79,26 @@ const useStyles = makeStyles((theme) => ({
     loginSideSpan: {
         fontWeight: 700,
         marginBottom: 10,
-    }
+    },
+    loginInput: {
+        marginBottom: 20,
+    },
+    loginButton: {
+        width: '35%',
+    },
 }));
 
 const SignIn = () => {
     const classes = useStyles();
+    const [openLoginPopup, setOpenLoginPopup] = React.useState(false);
+
+    const handleClickOpenLoginPopup = () => {
+        setOpenLoginPopup(true);
+    };
+    
+    const handleCloseLoginPopup = () => {
+        setOpenLoginPopup(false);
+    };
 
     return(
         <div className={classes.wrapper}>
@@ -101,7 +125,41 @@ const SignIn = () => {
                     <Typography className={classes.loginSideTitle} variant="h4">Find out what is happening in the world.</Typography>
                     <Typography className={classes.loginSideSpan}>Join Twitter now.</Typography>
                     <Button style={{ marginBottom: 15 }} variant="contained" color="primary" fullWidth>Registration</Button>
-                    <Button variant="outlined" color="primary" fullWidth>Login</Button>
+                    <Button onClick={handleClickOpenLoginPopup} variant="outlined" color="primary" fullWidth>Login</Button>
+
+                    <Dialog open={openLoginPopup} onClose={handleCloseLoginPopup} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Log in to Twitter</DialogTitle>
+                        <DialogContent>
+                            <TextField
+                                className={classes.loginInput}
+                                autoFocus
+                                id="email"
+                                label="Email"
+                                InputLabelProps={{ shrink: true }}
+                                variant="filled"
+                                type="email"
+                                fullWidth
+                            />
+                            <TextField
+                                className={classes.loginInput}
+                                autoFocus
+                                id="password"
+                                label="Password"
+                                InputLabelProps={{ shrink: true }}
+                                variant="filled"
+                                type="password"
+                                fullWidth
+                            />
+                            <DialogActions>
+                                <Button className={classes.loginButton} onClick={handleCloseLoginPopup} variant="outlined" color="primary">
+                                    Cancel
+                                </Button>
+                                <Button className={classes.loginButton} onClick={handleCloseLoginPopup} color="primary" variant="contained">
+                                    Login
+                                </Button>
+                            </DialogActions>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </div>
         </div>
