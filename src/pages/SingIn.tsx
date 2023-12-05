@@ -7,12 +7,16 @@ import {
     DialogTitle, 
     DialogContent,
     TextField,
-    DialogActions
+    DialogActions,
+    Grid
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+
 
 const useStyles = makeStyles((theme) => ({
     wrapper: {
@@ -86,11 +90,29 @@ const useStyles = makeStyles((theme) => ({
     loginButton: {
         width: '35%',
     },
+    registerDateWrapper: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        paddingTop: '5px',
+    },
+    registerDateText: {
+        width: '60%',
+        '& p': {
+            marginTop: 0
+        }
+    },
+    registerDateInput: {
+        width: '40%'
+    },
+    registerDialogAction: {
+        marginTop: '15px'
+    },
 }));
 
 const SignIn = () => {
     const classes = useStyles();
     const [openLoginPopup, setOpenLoginPopup] = React.useState(false);
+    const [openRegisterPopup, setOpenRegisterPopup] = React.useState(false);
 
     const handleClickOpenLoginPopup = () => {
         setOpenLoginPopup(true);
@@ -98,6 +120,22 @@ const SignIn = () => {
     
     const handleCloseLoginPopup = () => {
         setOpenLoginPopup(false);
+    };
+
+    const handleClickOpenRegisterPopup = () => {
+        setOpenRegisterPopup(true);
+    };
+    
+    const handleCloseRegisterPopup = () => {
+        setOpenRegisterPopup(false);
+    };
+
+    const [selectedDate, setSelectedDate] = React.useState<Date | null>(
+        new Date('2014-08-18T21:11:54'),
+    );
+    
+    const handleDateChange = (date: Date | null) => {
+        setSelectedDate(date);
     };
 
     return(
@@ -124,7 +162,7 @@ const SignIn = () => {
                     <TwitterIcon color="primary" className={classes.loginTwitterIcon} />
                     <Typography className={classes.loginSideTitle} variant="h4">Find out what is happening in the world.</Typography>
                     <Typography className={classes.loginSideSpan}>Join Twitter now.</Typography>
-                    <Button style={{ marginBottom: 15 }} variant="contained" color="primary" fullWidth>Registration</Button>
+                    <Button onClick={handleClickOpenRegisterPopup} style={{ marginBottom: 15 }} variant="contained" color="primary" fullWidth>Registration</Button>
                     <Button onClick={handleClickOpenLoginPopup} variant="outlined" color="primary" fullWidth>Login</Button>
 
                     <Dialog open={openLoginPopup} onClose={handleCloseLoginPopup} aria-labelledby="form-dialog-title">
@@ -156,6 +194,42 @@ const SignIn = () => {
                                 </Button>
                                 <Button className={classes.loginButton} onClick={handleCloseLoginPopup} color="primary" variant="contained">
                                     Login
+                                </Button>
+                            </DialogActions>
+                        </DialogContent>
+                    </Dialog>
+
+                    <Dialog open={openRegisterPopup} onClose={handleCloseRegisterPopup} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Create your account</DialogTitle>
+                        <DialogContent>
+                            <TextField className={classes.loginInput} id="name" label="Name" variant="outlined" type="name" fullWidth />
+                            <TextField className={classes.loginInput} id="email" label="Email" variant="outlined" type="email" fullWidth />
+                            <Typography variant="h6">Date of birth</Typography>
+                            <div className={classes.registerDateWrapper}>
+                                <div className={classes.registerDateText}>
+                                    <p>This will not be show publicly. Confirm your own age.</p>
+                                </div>
+                                <div className={classes.registerDateInput}>
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <KeyboardDatePicker
+                                            id="birthday"
+                                            label="Date of birth"
+                                            format="MM/dd/yyyy"
+                                            value={selectedDate}
+                                            onChange={handleDateChange}
+                                            KeyboardButtonProps={{
+                                                'aria-label': 'change date',
+                                            }}
+                                        />
+                                    </MuiPickersUtilsProvider>
+                                </div>
+                            </div>
+                            <DialogActions className={classes.registerDialogAction}>
+                                <Button className={classes.loginButton} onClick={handleCloseRegisterPopup} variant="outlined" color="primary">
+                                    Cancel
+                                </Button>
+                                <Button className={classes.loginButton} onClick={handleCloseRegisterPopup} color="primary" variant="contained">
+                                    Next
                                 </Button>
                             </DialogActions>
                         </DialogContent>
