@@ -25,7 +25,7 @@ export const theme = createTheme({
             main: red.A400,
         },
         background: {
-            default: '#fff',
+            default: '#fff'
         },
     },
     overrides: {
