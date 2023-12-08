@@ -7,8 +7,7 @@ import {
     DialogTitle, 
     DialogContent,
     TextField,
-    DialogActions,
-    Grid
+    DialogActions
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
