@@ -12,7 +12,7 @@ import RepeatIcon from '@material-ui/icons/Repeat';
 import FavoriteIcon from '@material-ui/icons/FavoriteBorder';
 import ReplyIcon from '@material-ui/icons/Reply';
 
-import { useHomeStyles } from "../../pages/Home";
+import { useHomeStyles } from "../pages/Home";
 
 interface TweetProps{
     text: string;
@@ -33,7 +33,7 @@ export const Tweet: React.FC<TweetProps> = ({text, user, classes}: TweetProps): 
                 </div>
                 <div className={classes.tweetInfo}>
                     <Typography >
-                        <b>{user.fullname}</b> <span className={classes.tweetUserName}>@{user.username}</span>
+                        <b>{user.fullname}</b> <span className={classes.tweetSpan}>@{user.username} · 1h</span>
                     </Typography>
                     <Typography variant="body1" gutterBottom>{text}</Typography>
                     <div className={classes.tweetFooter}>

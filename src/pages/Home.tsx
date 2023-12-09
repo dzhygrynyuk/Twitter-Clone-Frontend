@@ -10,18 +10,14 @@ import {
     IconButton,
     Typography,
     InputBase,
-    Paper
+    Paper,
+    Button
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
-import SearchIcon from '@material-ui/icons/Search';
-import NotificationsIcon from '@material-ui/icons/NotificationsNone';
-import MailIcon from '@material-ui/icons/MailOutline';
-import BookmarkIcon from '@material-ui/icons/BookmarkBorder';
-import ListIcon from '@material-ui/icons/ListAlt';
-import PersonIcon from '@material-ui/icons/PersonOutline';
 import grey from '@material-ui/core/colors/grey';
 
 import { Tweet } from "../components/Tweet";
+import { SideMenu } from "../components/SideMenu";
 
 export const useHomeStyles = makeStyles((theme) => ({
     sideMenuList: {
@@ -30,21 +26,37 @@ export const useHomeStyles = makeStyles((theme) => ({
         margin: 0,
     },
     logo: {
-        margin: "5px 0",
+        margin: "2px 0 10px",
     },
     logoIcon: {
         fontSize: 36,
     },
     sideMenuListItem: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: 'max-content',
+        borderRadius: 30,
+        paddingLeft: 15,
+        paddingRight: 40,
+        paddingTop: 11,
+        paddingBottom: 11,
+        marginBottom: 10,
     },
     sideMenuListItemLaber: {
         fontSize: 20,
-        fontWeight: 700,
+        lineHeight: 1,
+        fontWeight: 400,
+    },
+    sideMenuListItemIconWrapper: {
+        minWidth: '40px', 
     },
     sideMenuListItemIcon: {
         fontSize: 28,
+        color: '#0f1419',
+    },
+    sideButton: {
+        padding: theme.spacing(3),
+        marginTop: 10,
     },
     tweetsWapper: {
         height: '100%',
@@ -82,7 +94,7 @@ export const useHomeStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         width: '80%',
     },
-    tweetUserName: {
+    tweetSpan: {
         color: grey[500],
     },
 }));
@@ -105,49 +117,11 @@ const Home = () => {
         <Container>
             <Grid container spacing={3}>
                 <Grid item xs={3}>
-                    <ul className={classes.sideMenuList}>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton className={classes.logo} color="primary">
-                                <TwitterIcon className={classes.logoIcon}/>
-                            </IconButton>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton>
-                                <SearchIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLaber} variant="h6">Search</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton>
-                                <NotificationsIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLaber} variant="h6">Notifications</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton>
-                                <MailIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLaber} variant="h6">Messages</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton>
-                                <BookmarkIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLaber} variant="h6">Bookmarks</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton>
-                                <ListIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLaber} variant="h6">Lists</Typography>
-                        </li>
-                        <li className={classes.sideMenuListItem}>
-                            <IconButton>
-                                <PersonIcon className={classes.sideMenuListItemIcon} />
-                            </IconButton>
-                            <Typography className={classes.sideMenuListItemLaber} variant="h6">Profile</Typography>
-                        </li>
-                    </ul>
+                    <IconButton color="primary" className={classes.logo}>
+                        <TwitterIcon className={classes.logoIcon} />
+                    </IconButton>
+                    <SideMenu classes={classes} />
+                    <Button className={classes.sideButton} variant="contained" color="primary" fullWidth>Tweet</Button>
                 </Grid>
                 <Grid item xs={5}>
                     <Paper className={classes.tweetsWapper} variant="outlined">
