@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import {
     makeStyles,
     withStyles,
@@ -22,7 +23,6 @@ import ChatIcon from '@material-ui/icons/ChatBubbleOutline';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import FavoriteIcon from '@material-ui/icons/FavoriteBorder';
 import ReplyIcon from '@material-ui/icons/Reply';
-
 import grey from '@material-ui/core/colors/grey';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
     },
     logo: {
-        margin: "10px 0",
+        margin: "5px 0",
     },
     logoIcon: {
         fontSize: 36,
@@ -54,26 +54,38 @@ const useStyles = makeStyles((theme) => ({
         borderBottom: 0,
         borderRadius: 0,
     },
-    tweetsHeader: {
+    tweetsBlock:{
         borderTop: 0,
         borderLeft: 0,
         borderRight: 0,
         borderRadius: 0,
         padding: '10px 15px',
+    },
+    tweetsHeader: {
         '& h6': {
             fontWeight: 800,
         },
     },
-    tweetUserName: {
-        color: grey[500],
+    tweet: {
+        cursor: 'pointer',
+        '&:hover': {
+            backgroundColor: 'rgb(245, 248, 250)',
+        },
     },
-    tweetInfoBox: {
-        paddingLeft: '20px',
+    tweetWrapper: {
+        width: '100%',
+        display: 'flex',
+    },
+    tweetInfo: {
+        paddingLeft: '10px',
     },
     tweetFooter: {
         display: 'flex',
         justifyContent: 'space-between',
         width: '80%',
+    },
+    tweetUserName: {
+        color: grey[500],
     },
 }));
 
@@ -141,15 +153,15 @@ const Home = () => {
                 </Grid>
                 <Grid item xs={5}>
                     <Paper className={classes.tweetsWapper} variant="outlined">
-                        <Paper className={classes.tweetsHeader} variant="outlined">
+                        <Paper className={classNames(classes.tweetsBlock, classes.tweetsHeader)} variant="outlined">
                             <Typography variant="h6">Home</Typography>
                         </Paper>
-                        <Paper className={classes.tweetsHeader} variant="outlined">
-                            <Grid container spacing={3}>
-                                <Grid item xs={1}>
+                        <Paper className={classNames(classes.tweetsBlock, classes.tweet)} variant="outlined">
+                            <div className={classes.tweetWrapper}>
+                                <div>
                                     <Avatar alt="Remy Sharp" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" />
-                                </Grid>
-                                <Grid className={classes.tweetInfoBox} item xs={11}>
+                                </div>
+                                <div className={classes.tweetInfo}>
                                     <Typography >
                                         <b>Remy Sharp</b> <span className={classes.tweetUserName}>@sharp_remy</span>
                                     </Typography>
@@ -184,8 +196,8 @@ const Home = () => {
                                             <span>1</span>
                                         </div>
                                     </div>
-                                </Grid>
-                            </Grid>
+                                </div>
+                            </div>
                         </Paper>
                     </Paper>
                 </Grid>
