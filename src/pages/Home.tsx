@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+
 import {
     makeStyles,
     withStyles,
@@ -9,8 +10,7 @@ import {
     IconButton,
     Typography,
     InputBase,
-    Paper,
-    Avatar
+    Paper
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import SearchIcon from '@material-ui/icons/Search';
@@ -19,13 +19,11 @@ import MailIcon from '@material-ui/icons/MailOutline';
 import BookmarkIcon from '@material-ui/icons/BookmarkBorder';
 import ListIcon from '@material-ui/icons/ListAlt';
 import PersonIcon from '@material-ui/icons/PersonOutline';
-import ChatIcon from '@material-ui/icons/ChatBubbleOutline';
-import RepeatIcon from '@material-ui/icons/Repeat';
-import FavoriteIcon from '@material-ui/icons/FavoriteBorder';
-import ReplyIcon from '@material-ui/icons/Reply';
 import grey from '@material-ui/core/colors/grey';
 
-const useStyles = makeStyles((theme) => ({
+import { Tweet } from "../components/Tweet";
+
+export const useHomeStyles = makeStyles((theme) => ({
     sideMenuList: {
         listStyle: 'none',
         padding: 0,
@@ -101,7 +99,7 @@ const SearchTextFields = withStyles(() =>
 )(InputBase);
 
 const Home = () => {
-    const classes = useStyles();
+    const classes = useHomeStyles();
 
     return (
         <Container>
@@ -156,49 +154,15 @@ const Home = () => {
                         <Paper className={classNames(classes.tweetsBlock, classes.tweetsHeader)} variant="outlined">
                             <Typography variant="h6">Home</Typography>
                         </Paper>
-                        <Paper className={classNames(classes.tweetsBlock, classes.tweet)} variant="outlined">
-                            <div className={classes.tweetWrapper}>
-                                <div>
-                                    <Avatar alt="Remy Sharp" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" />
-                                </div>
-                                <div className={classes.tweetInfo}>
-                                    <Typography >
-                                        <b>Remy Sharp</b> <span className={classes.tweetUserName}>@sharp_remy</span>
-                                    </Typography>
-                                    <Typography variant="body1" gutterBottom>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-                                        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
-                                        dignissimos laborum fugiat deleniti?
-                                    </Typography>
-                                    <div className={classes.tweetFooter}>
-                                        <div>
-                                            <IconButton>
-                                                <ChatIcon style={{ fontSize: 20 }} />
-                                            </IconButton>
-                                            <span>1</span>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <RepeatIcon style={{ fontSize: 20 }} />
-                                            </IconButton>
-                                            <span>1</span>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <FavoriteIcon style={{ fontSize: 20 }} />
-                                            </IconButton>
-                                            <span>1</span>
-                                        </div>
-                                        <div>
-                                            <IconButton>
-                                                <ReplyIcon style={{ fontSize: 20 }} />
-                                            </IconButton>
-                                            <span>1</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Paper>
+                        <Tweet 
+                            text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?'
+                            user={{
+                                fullname: 'Remy Sharp',
+                                username: 'sharp_remy',
+                                avatarUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
+                            }}
+                            classes={classes}
+                        />
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>
