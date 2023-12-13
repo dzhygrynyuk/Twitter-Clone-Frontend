@@ -11,9 +11,11 @@ import {
     Typography,
     InputBase,
     Paper,
-    Button
+    Button,
+    Hidden
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
+import CreateIcon from '@material-ui/icons/Create';
 import grey from '@material-ui/core/colors/grey';
 
 import { Tweet } from "../components/Tweet";
@@ -56,7 +58,7 @@ export const useHomeStyles = makeStyles((theme) => ({
     },
     sideButton: {
         padding: theme.spacing(3),
-        marginTop: 10,
+        marginTop: 15,
     },
     tweetsWapper: {
         height: '100%',
@@ -116,14 +118,19 @@ const Home = () => {
     return (
         <Container>
             <Grid container spacing={3}>
-                <Grid item xs={3}>
+                <Grid item xs={1} sm={1} md={3}>
                     <IconButton color="primary" className={classes.logo}>
                         <TwitterIcon className={classes.logoIcon} />
                     </IconButton>
                     <SideMenu classes={classes} />
-                    <Button className={classes.sideButton} variant="contained" color="primary" fullWidth>Tweet</Button>
+                    <Button className={classes.sideButton} variant="contained" color="primary" fullWidth>
+                        <Hidden smDown>Tweet</Hidden>
+                        <Hidden mdUp>
+                            <CreateIcon />
+                        </Hidden>
+                    </Button>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={8} sm={8} md={6}>
                     <Paper className={classes.tweetsWapper} variant="outlined">
                         <Paper className={classNames(classes.tweetsBlock, classes.tweetsHeader)} variant="outlined">
                             <Typography variant="h6">Home</Typography>
@@ -139,7 +146,7 @@ const Home = () => {
                         />
                     </Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3} sm={3} md={3}>
                     <SearchTextFields placeholder="Search Twitter" fullWidth />
                 </Grid>
             </Grid>

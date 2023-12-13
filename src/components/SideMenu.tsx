@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography, MenuList, MenuItem, ListItemIcon } from "@material-ui/core";
+import { Typography, MenuList, MenuItem, ListItemIcon, Hidden } from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/HomeOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from '@material-ui/icons/NotificationsNone';
@@ -22,43 +22,57 @@ export const SideMenu: React.FC<SideMenuProps> = ({classes}: SideMenuProps): Rea
                 <ListItemIcon className={classes.sideMenuListItemIconWrapper}>
                     <HomeIcon className={classes.sideMenuListItemIcon} />
                 </ListItemIcon>
-                <Typography className={classes.sideMenuListItemLaber}>Home</Typography>
+                <Hidden smDown>
+                    <Typography className={classes.sideMenuListItemLaber}>Home</Typography>
+                </Hidden>
             </MenuItem>
             <MenuItem className={classes.sideMenuListItem}>
                 <ListItemIcon className={classes.sideMenuListItemIconWrapper}>
                     <SearchIcon className={classes.sideMenuListItemIcon} />
                 </ListItemIcon>
-                <Typography className={classes.sideMenuListItemLaber}>Search</Typography>
+                <Hidden smDown>
+                    <Typography className={classes.sideMenuListItemLaber}>Search</Typography>
+                </Hidden>
             </MenuItem>
             <MenuItem className={classes.sideMenuListItem}>
                 <ListItemIcon className={classes.sideMenuListItemIconWrapper}>
                     <NotificationsIcon className={classes.sideMenuListItemIcon} />
                 </ListItemIcon>
-                <Typography className={classes.sideMenuListItemLaber}>Notifications</Typography>
+                <Hidden smDown>
+                    <Typography className={classes.sideMenuListItemLaber}>Notifications</Typography>
+                </Hidden>
             </MenuItem>
             <MenuItem className={classes.sideMenuListItem}>
                 <ListItemIcon className={classes.sideMenuListItemIconWrapper}>
                     <MailIcon className={classes.sideMenuListItemIcon} />
                 </ListItemIcon>
-                <Typography className={classes.sideMenuListItemLaber}>Messages</Typography>
+                <Hidden smDown>
+                    <Typography className={classes.sideMenuListItemLaber}>Messages</Typography>
+                </Hidden>
             </MenuItem>
             <MenuItem className={classes.sideMenuListItem}>
                 <ListItemIcon className={classes.sideMenuListItemIconWrapper}>
                     <BookmarkIcon className={classes.sideMenuListItemIcon} />
                 </ListItemIcon>
-                <Typography className={classes.sideMenuListItemLaber}>Bookmarks</Typography>
+                <Hidden smDown>
+                    <Typography className={classes.sideMenuListItemLaber}>Bookmarks</Typography>
+                </Hidden>
             </MenuItem>
             <MenuItem className={classes.sideMenuListItem}>
                 <ListItemIcon className={classes.sideMenuListItemIconWrapper}>
                     <ListIcon className={classes.sideMenuListItemIcon} />
                 </ListItemIcon>
-                <Typography className={classes.sideMenuListItemLaber}>Lists</Typography>
+                <Hidden smDown>
+                    <Typography className={classes.sideMenuListItemLaber}>Lists</Typography>
+                </Hidden>
             </MenuItem>
             <MenuItem className={classes.sideMenuListItem}>
                 <ListItemIcon className={classes.sideMenuListItemIconWrapper}>
                     <PersonIcon className={classes.sideMenuListItemIcon} />
                 </ListItemIcon>
-                <Typography className={classes.sideMenuListItemLaber}>Profile</Typography>
+                <Hidden smDown>
+                    <Typography className={classes.sideMenuListItemLaber}>Profile</Typography>
+                </Hidden>
             </MenuItem>
         </MenuList>
     );
