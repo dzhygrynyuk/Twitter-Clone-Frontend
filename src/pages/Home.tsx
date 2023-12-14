@@ -12,10 +12,15 @@ import {
     InputBase,
     Paper,
     Button,
-    Hidden
+    Hidden,
+    Avatar,
+    TextareaAutosize
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import CreateIcon from '@material-ui/icons/Create';
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
+import CircularProgress from '@material-ui/icons/DonutLarge';
 import grey from '@material-ui/core/colors/grey';
 
 import { Tweet } from "../components/Tweet";
@@ -99,6 +104,45 @@ export const useHomeStyles = makeStyles((theme) => ({
     tweetSpan: {
         color: grey[500],
     },
+    addForm: {
+        padding: 20,
+    },
+    addFormBody: {
+        width: '100%',
+        display: 'flex',
+    },
+    addFormBottom: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    addFormBottomActions: {
+        marginTop: 10,
+        paddingLeft: 70,
+    },
+    addFormTextarea: {
+        width: '100%',
+        border: 0,
+        fontSize: 20,
+        outline: 'none',
+        resize: 'none',
+        fontFamily: 'inherit',
+        paddingLeft: 15,
+    },
+    addFormBottomRight: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    addFormBottomLine: {
+        height: 12,
+        backgroundColor: '#E6ECF0',
+    },
+    addFormCircleProgress: {
+        position: 'relative',
+        width: 20,
+        height: 20,
+        margin: '0 10px',
+    }
 }));
 
 const SearchTextFields = withStyles(() => 
@@ -134,6 +178,32 @@ const Home = () => {
                     <Paper className={classes.tweetsWapper} variant="outlined">
                         <Paper className={classNames(classes.tweetsBlock, classes.tweetsHeader)} variant="outlined">
                             <Typography variant="h6">Home</Typography>
+                        </Paper>
+                        <Paper>
+                            <div className={classes.addForm}>
+                                <div className={classes.addFormBody}>
+                                    <Avatar alt="Remy Sharp" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" />
+                                    <TextareaAutosize className={classes.addFormTextarea} placeholder="What is happening?"/>
+                                </div>
+                                <div className={classes.addFormBottom}>
+                                    <div className={classes.addFormBottomActions}>
+                                        <IconButton color="primary">
+                                            <ImageOutlinedIcon style={{ fontSize: 26 }} />
+                                        </IconButton>
+                                        <IconButton color="primary">
+                                            <EmojiIcon style={{ fontSize: 26 }} />
+                                        </IconButton>
+                                    </div>
+                                    <div className={classes.addFormBottomRight}>
+                                        <span>280</span>
+                                        <div className={classes.addFormCircleProgress}>
+                                            <CircularProgress />
+                                        </div>
+                                        <Button color="primary" variant="contained">Tweet</Button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={classes.addFormBottomLine}></div>
                         </Paper>
                         <Tweet 
                             text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?'
