@@ -9,24 +9,37 @@ import {
     Grid,
     IconButton,
     Typography,
-    InputBase,
     Paper,
     Button,
     Hidden,
     Avatar,
-    TextareaAutosize
+    TextareaAutosize,
+    CircularProgress,
+    InputAdornment,
+    TextField,
+    Theme,
+    List,
+    ListItem,
+    ListItemText,
+    Divider,
+    ListItemAvatar
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import CreateIcon from '@material-ui/icons/Create';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
-import CircularProgress from '@material-ui/icons/DonutLarge';
+import SearchIcon from '@material-ui/icons/Search';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import grey from '@material-ui/core/colors/grey';
 
 import { Tweet } from "../components/Tweet";
 import { SideMenu } from "../components/SideMenu";
 
 export const useHomeStyles = makeStyles((theme) => ({
+    leftSide: {
+        position: 'sticky',
+        top: 0,
+    },
     sideMenuList: {
         listStyle: 'none',
         padding: 0,
@@ -79,6 +92,11 @@ export const useHomeStyles = makeStyles((theme) => ({
         padding: '10px 15px',
     },
     tweetsHeader: {
+        position: 'sticky',
+        top: 0,
+        backgroundColor: 'rgba(255, 255, 255, 0.85)',
+        backdropFilter: 'blur(10px)',
+        zIndex: 1,
         '& h6': {
             fontWeight: 800,
         },
@@ -118,7 +136,7 @@ export const useHomeStyles = makeStyles((theme) => ({
     },
     addFormBottomActions: {
         marginTop: 10,
-        paddingLeft: 70,
+        paddingLeft: 45,
     },
     addFormTextarea: {
         width: '100%',
@@ -142,19 +160,85 @@ export const useHomeStyles = makeStyles((theme) => ({
         width: 20,
         height: 20,
         margin: '0 10px',
+        '& .MuiCircularProgress-root': {
+            position: 'absolute',
+        }
+    },
+    rightSide: {
+        paddingTop: 20,
+        position: 'sticky',
+        top: 0,
+    },
+    rightSideBlock: {
+        marginTop: 20,
+        backgroundColor: '#F5F8FA',
+        '& .MuiLost-root': {
+            paddingTop: 0,
+        },
+    },
+    rightSideBlockHeader: {
+        borderTop: 0,
+        borderLeft: 0,
+        borderRight: 0,
+        backgroundColor: 'transparent',
+        padding: '13px 18px',
+        '& b': {
+            fontSize: 20,
+            fontWeight: 700,
+        }
+    },
+    rightSideBlockList: {
+        padding: 0,
+    },
+    rightSideBlockItem: {
+        cursor: 'pointer',
+        '& .MuiTypography-body1': {
+            fontWeight: 700,
+        },
+        '& .MuiListItemAvatar-root': {
+            minWidth: 50,
+        },
+        '& .MuiListItemText-root': {
+            margin: 0,
+        },
+        '&:hover': {
+            backgroundColor: '#EDF3F6',
+        }
     }
 }));
 
-const SearchTextFields = withStyles(() => 
-    createStyles({
-        input: {
+const SearchTextFields = withStyles((theme: Theme) => ({
+    root: {
+        '& .MuiOutlinedInput-root': {
             borderRadius: 30,
             backgroundColor: '#E6ECF0',
-            height: '45px',
             padding: 0,
+            paddingLeft: 15,
+            '&.Mui-focused': {
+                backgroundColor: '#fff',
+                '& fieldset': {
+                    borderWidth: 1,
+                    borderColor: theme.palette.primary.main,
+                },
+                '& svg path': {
+                    fill: theme.palette.primary.main,
+                }
+            },
+            '&:hover': {
+                '& fieldset': {
+                    borderColor: 'transparent',
+                }
+            },
+            '& fieldset': {
+                borderColor: 'transparent',
+                borderWidth: 1,
+            }
         },
-    }),
-)(InputBase);
+        '& .MuiOutlinedInput-input': {
+            padding: '12px 14px 14px 5px',
+        }
+    }
+}))(TextField);
 
 const Home = () => {
     const classes = useHomeStyles();
@@ -163,16 +247,18 @@ const Home = () => {
         <Container>
             <Grid container spacing={3}>
                 <Grid item xs={1} sm={1} md={3}>
-                    <IconButton color="primary" className={classes.logo}>
-                        <TwitterIcon className={classes.logoIcon} />
-                    </IconButton>
-                    <SideMenu classes={classes} />
-                    <Button className={classes.sideButton} variant="contained" color="primary" fullWidth>
-                        <Hidden smDown>Tweet</Hidden>
-                        <Hidden mdUp>
-                            <CreateIcon />
-                        </Hidden>
-                    </Button>
+                    <div className={classes.leftSide}>
+                        <IconButton color="primary" className={classes.logo}>
+                            <TwitterIcon className={classes.logoIcon} />
+                        </IconButton>
+                        <SideMenu classes={classes} />
+                        <Button className={classes.sideButton} variant="contained" color="primary" fullWidth>
+                            <Hidden smDown>Tweet</Hidden>
+                            <Hidden mdUp>
+                                <CreateIcon />
+                            </Hidden>
+                        </Button>
+                    </div>
                 </Grid>
                 <Grid item xs={8} sm={8} md={6}>
                     <Paper className={classes.tweetsWapper} variant="outlined">
@@ -182,7 +268,7 @@ const Home = () => {
                         <Paper>
                             <div className={classes.addForm}>
                                 <div className={classes.addFormBody}>
-                                    <Avatar alt="Remy Sharp" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" />
+                                    <Avatar alt="Steve Jobs" src="https://i.pinimg.com/236x/e0/7d/06/e07d0688389b79d19a014fd12d9bea28--flat-design-illustration-illustration-styles.jpg" />
                                     <TextareaAutosize className={classes.addFormTextarea} placeholder="What is happening?"/>
                                 </div>
                                 <div className={classes.addFormBottom}>
@@ -197,7 +283,8 @@ const Home = () => {
                                     <div className={classes.addFormBottomRight}>
                                         <span>280</span>
                                         <div className={classes.addFormCircleProgress}>
-                                            <CircularProgress />
+                                            <CircularProgress variant="static" size={20} thickness={6} value={25} />
+                                            <CircularProgress style={{ color: 'rgba(0,0,0,0.1)' }} variant="static" size={20} thickness={6} value={100} />
                                         </div>
                                         <Button color="primary" variant="contained">Tweet</Button>
                                     </div>
@@ -205,19 +292,119 @@ const Home = () => {
                             </div>
                             <div className={classes.addFormBottomLine}></div>
                         </Paper>
-                        <Tweet 
-                            text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?'
-                            user={{
-                                fullname: 'Remy Sharp',
-                                username: 'sharp_remy',
-                                avatarUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
-                            }}
-                            classes={classes}
-                        />
+                        {[...new Array(20).fill(
+                            <Tweet 
+                                text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?'
+                                user={{
+                                    fullname: 'Remy Sharp',
+                                    username: 'sharp_remy',
+                                    avatarUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
+                                }}
+                                classes={classes}
+                            />
+                        )]}
                     </Paper>
                 </Grid>
                 <Grid item xs={3} sm={3} md={3}>
-                    <SearchTextFields placeholder="Search Twitter" fullWidth />
+                    <div className={classes.rightSide}>
+                        <SearchTextFields 
+                            variant="outlined"
+                            placeholder="Search Twitter"
+                            InputProps={{
+                                startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                                ),
+                            }}
+                            fullWidth 
+                        />
+                        <Paper className={classes.rightSideBlock}>
+                            <Paper className={classes.rightSideBlockHeader} variant="outlined">
+                                <b>Trends for you</b>
+                            </Paper>
+                            <List className={classes.rightSideBlockList}>
+                                <ListItem className={classes.rightSideBlockItem}>
+                                    <ListItemText
+                                        primary="React JS"
+                                        secondary={
+                                            <Typography component="span" variant="body2">
+                                                15.9K posts
+                                            </Typography>
+                                        }
+                                    />
+                                </ListItem>
+                                <Divider component="li" />
+                                <ListItem className={classes.rightSideBlockItem}>
+                                    <ListItemText
+                                        primary="JavaScript"
+                                        secondary={
+                                            <Typography component="span" variant="body2">
+                                                23.1K posts
+                                            </Typography>
+                                        }
+                                    />
+                                </ListItem>
+                                <Divider component="li" />
+                                <ListItem className={classes.rightSideBlockItem}>
+                                    <ListItemText
+                                        primary="Node.js"
+                                        secondary={
+                                            <Typography component="span" variant="body2">
+                                                33.7K posts
+                                            </Typography>
+                                        }
+                                    />
+                                </ListItem>
+                            </List>
+                        </Paper>
+                        <Paper className={classes.rightSideBlock}>
+                            <Paper className={classes.rightSideBlockHeader} variant="outlined">
+                                <b>Who to follow</b>
+                            </Paper>
+                            <List className={classes.rightSideBlockList}>
+                                <ListItem className={classes.rightSideBlockItem}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            alt="Tim Cook" 
+                                            src="https://media.idownloadblog.com/wp-content/uploads/2018/07/Tim-Cook-memoji.jpg" 
+                                        />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary="Tim Cook"
+                                        secondary={
+                                            <Typography component="span" variant="body2">
+                                                @TimCook
+                                            </Typography>
+                                        }
+                                    />
+                                    <Button color="primary">
+                                        <PersonAddIcon />
+                                    </Button>
+                                </ListItem>
+                                <Divider component="li" />
+                                <ListItem className={classes.rightSideBlockItem}>
+                                    <ListItemAvatar>
+                                        <Avatar 
+                                            alt="Mark Zuckerberg" 
+                                            src="https://static.independent.co.uk/2022/08/22/10/mark%20zuckerberg%20metaverse%20avatar.png" 
+                                        />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary="Mark Zuckerberg"
+                                        secondary={
+                                            <Typography component="span" variant="body2">
+                                                @MarkZuckerberg
+                                            </Typography>
+                                        }
+                                    />
+                                    <Button color="primary">
+                                        <PersonAddIcon />
+                                    </Button>
+                                </ListItem>
+                            </List>
+                        </Paper>        
+                    </div>
                 </Grid>
             </Grid>
         </Container>
