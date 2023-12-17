@@ -12,7 +12,7 @@ import RepeatIcon from '@material-ui/icons/Repeat';
 import FavoriteIcon from '@material-ui/icons/FavoriteBorder';
 import ReplyIcon from '@material-ui/icons/Reply';
 
-import { useHomeStyles } from "../pages/Home";
+import { useHomeStyles } from "../pages/Home/theme";
 
 interface TweetProps{
     text: string;
