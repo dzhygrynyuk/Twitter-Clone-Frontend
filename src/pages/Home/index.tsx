@@ -2,7 +2,6 @@ import React from "react";
 import classNames from "classnames";
 
 import {
-    withStyles,
     Container,
     Grid,
     IconButton,
@@ -12,8 +11,6 @@ import {
     Hidden,
     Avatar,
     InputAdornment,
-    TextField,
-    Theme,
     List,
     ListItem,
     ListItemText,
@@ -28,40 +25,8 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import { Tweet } from "../../components/Tweet";
 import { SideMenu } from "../../components/SideMenu";
 import { AddTweetForm } from "../../components/AddTweetForm";
+import { SearchTextFields } from "../../components/SearchTextFields";
 import { useHomeStyles } from "./theme";
-
-const SearchTextFields = withStyles((theme: Theme) => ({
-    root: {
-        '& .MuiOutlinedInput-root': {
-            borderRadius: 30,
-            backgroundColor: '#E6ECF0',
-            padding: 0,
-            paddingLeft: 15,
-            '&.Mui-focused': {
-                backgroundColor: '#fff',
-                '& fieldset': {
-                    borderWidth: 1,
-                    borderColor: theme.palette.primary.main,
-                },
-                '& svg path': {
-                    fill: theme.palette.primary.main,
-                }
-            },
-            '&:hover': {
-                '& fieldset': {
-                    borderColor: 'transparent',
-                }
-            },
-            '& fieldset': {
-                borderColor: 'transparent',
-                borderWidth: 1,
-            }
-        },
-        '& .MuiOutlinedInput-input': {
-            padding: '12px 14px 14px 5px',
-        }
-    }
-}))(TextField);
 
 const Home = () => {
     const classes = useHomeStyles();
