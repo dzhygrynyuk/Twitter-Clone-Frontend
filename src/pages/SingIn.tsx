@@ -16,6 +16,7 @@ import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
+import { ModelBlock } from "../components/ModalBlock";
 
 const useStyles = makeStyles((theme) => ({
     wrapper: {
@@ -163,76 +164,70 @@ const SignIn = () => {
                     <Typography className={classes.loginSideSpan}>Join Twitter now.</Typography>
                     <Button onClick={handleClickOpenRegisterPopup} style={{ marginBottom: 15 }} variant="contained" color="primary" fullWidth>Registration</Button>
                     <Button onClick={handleClickOpenLoginPopup} variant="outlined" color="primary" fullWidth>Login</Button>
+                    
+                    <ModelBlock title='Log in to Twitter' visible={openLoginPopup} onClose={handleCloseLoginPopup} >
+                        <TextField
+                            className={classes.loginInput}
+                            autoFocus
+                            id="email"
+                            label="Email"
+                            InputLabelProps={{ shrink: true }}
+                            variant="filled"
+                            type="email"
+                            fullWidth
+                        />
+                        <TextField
+                            className={classes.loginInput}
+                            autoFocus
+                            id="password"
+                            label="Password"
+                            InputLabelProps={{ shrink: true }}
+                            variant="filled"
+                            type="password"
+                            fullWidth
+                        />
+                        <DialogActions>
+                            <Button className={classes.loginButton} onClick={handleCloseLoginPopup} variant="outlined" color="primary">
+                                Cancel
+                            </Button>
+                            <Button className={classes.loginButton} onClick={handleCloseLoginPopup} color="primary" variant="contained">
+                                Login
+                            </Button>
+                        </DialogActions>
+                    </ModelBlock>
 
-                    <Dialog open={openLoginPopup} onClose={handleCloseLoginPopup} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Log in to Twitter</DialogTitle>
-                        <DialogContent>
-                            <TextField
-                                className={classes.loginInput}
-                                autoFocus
-                                id="email"
-                                label="Email"
-                                InputLabelProps={{ shrink: true }}
-                                variant="filled"
-                                type="email"
-                                fullWidth
-                            />
-                            <TextField
-                                className={classes.loginInput}
-                                autoFocus
-                                id="password"
-                                label="Password"
-                                InputLabelProps={{ shrink: true }}
-                                variant="filled"
-                                type="password"
-                                fullWidth
-                            />
-                            <DialogActions>
-                                <Button className={classes.loginButton} onClick={handleCloseLoginPopup} variant="outlined" color="primary">
-                                    Cancel
-                                </Button>
-                                <Button className={classes.loginButton} onClick={handleCloseLoginPopup} color="primary" variant="contained">
-                                    Login
-                                </Button>
-                            </DialogActions>
-                        </DialogContent>
-                    </Dialog>
-
-                    <Dialog open={openRegisterPopup} onClose={handleCloseRegisterPopup} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Create your account</DialogTitle>
-                        <DialogContent>
-                            <TextField className={classes.loginInput} id="name" label="Name" variant="outlined" type="name" fullWidth />
-                            <TextField className={classes.loginInput} id="email" label="Email" variant="outlined" type="email" fullWidth />
-                            <Typography variant="h6">Date of birth</Typography>
-                            <div className={classes.registerDateWrapper}>
-                                <div className={classes.registerDateText}>
-                                    <p>This will not be show publicly. Confirm your own age.</p>
-                                </div>
-                                <div className={classes.registerDateInput}>
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <KeyboardDatePicker
-                                            id="birthday"
-                                            label="Date of birth"
-                                            format="MM/dd/yyyy"
-                                            value={selectedDate}
-                                            onChange={handleDateChange}
-                                            KeyboardButtonProps={{
-                                                'aria-label': 'change date',
-                                            }}
-                                        />
-                                    </MuiPickersUtilsProvider>
-                                </div>
+                    <ModelBlock title='Create your account' visible={openRegisterPopup} onClose={handleCloseRegisterPopup} >
+                        <TextField className={classes.loginInput} id="name" label="Name" variant="outlined" type="name" fullWidth />
+                        <TextField className={classes.loginInput} id="email" label="Email" variant="outlined" type="email" fullWidth />
+                        <Typography variant="h6">Date of birth</Typography>
+                        <div className={classes.registerDateWrapper}>
+                            <div className={classes.registerDateText}>
+                                <p>This will not be show publicly. Confirm your own age.</p>
                             </div>
-                            <DialogActions className={classes.registerDialogAction}>
-                                <Button className={classes.loginButton} onClick={handleCloseRegisterPopup} variant="outlined" color="primary">
-                                    Cancel
-                                </Button>
-                                <Button className={classes.loginButton} onClick={handleCloseRegisterPopup} color="primary" variant="contained">
-                                    Next
-                                </Button>
-                            </DialogActions>
-                        </DialogContent>
-                    </Dialog>
+                            <div className={classes.registerDateInput}>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                        id="birthday"
+                                        label="Date of birth"
+                                        format="MM/dd/yyyy"
+                                        value={selectedDate}
+                                        onChange={handleDateChange}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',
+                                        }}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            </div>
+                        </div>
+                        <DialogActions className={classes.registerDialogAction}>
+                            <Button className={classes.loginButton} onClick={handleCloseRegisterPopup} variant="outlined" color="primary">
+                                Cancel
+                            </Button>
+                            <Button className={classes.loginButton} onClick={handleCloseRegisterPopup} color="primary" variant="contained">
+                                Next
+                            </Button>
+                        </DialogActions>
+                    </ModelBlock>
                 </div>
             </div>
         </div>
