@@ -56,9 +56,9 @@ const Home = () => {
                                 <CreateIcon />
                             </Hidden>
                         </Button>
-                        <ModelBlock title='Create tweet' visible={visibleTweetModal} onClose={handleCloseTweetPopup} >
+                        <ModelBlock visible={visibleTweetModal} onClose={handleCloseTweetPopup} >
                             <div className={classes.addTweetPopup}>
-                                <AddTweetForm classes={classes} />
+                                <AddTweetForm classes={classes} maxRows={10} />
                             </div>
                         </ModelBlock>
                     </div>

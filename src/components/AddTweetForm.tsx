@@ -16,9 +16,10 @@ const MAX_LENGTH = 280;
 
 interface AddTweetFormProps{
     classes: ReturnType<typeof useHomeStyles>;
+    maxRows?: number;
 }
 
-export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes }: AddTweetFormProps): React.ReactElement => {
+export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: AddTweetFormProps): React.ReactElement => {
     const [text, setText] = React.useState<string>('');
     const textLimitPercent = (text.length / 280) * 100;
     const textCount = MAX_LENGTH - text.length;
@@ -40,8 +41,9 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes }: AddTweetF
                 <TextareaAutosize 
                     className={classes.addFormTextarea}
                     value={text}
+                    maxRows={maxRows}
                     onChange={handleChangeTextarea}
-                    placeholder="What is happening?" 
+                    placeholder="What is happening?"
                 />
             </div>
             <div className={classes.addFormBottom}>
