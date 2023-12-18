@@ -170,5 +170,11 @@ export const useHomeStyles = makeStyles((theme) => ({
         '&:hover': {
             backgroundColor: '#EDF3F6',
         }
+    },
+    addTweetPopup: {
+        width: 450,
+        '& > div': {
+            padding: '5px 0',
+        }
     }
 }));

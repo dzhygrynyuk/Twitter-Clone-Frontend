@@ -26,10 +26,20 @@ import { Tweet } from "../../components/Tweet";
 import { SideMenu } from "../../components/SideMenu";
 import { AddTweetForm } from "../../components/AddTweetForm";
 import { SearchTextFields } from "../../components/SearchTextFields";
+import { ModelBlock } from "../../components/ModalBlock";
 import { useHomeStyles } from "./theme";
 
 const Home = () => {
     const classes = useHomeStyles();
+    const [visibleTweetModal, setVisibleTweetModal] = React.useState(false);
+
+    const handleOpenTweetPopup = () => {
+        setVisibleTweetModal(true);
+    }
+
+    const handleCloseTweetPopup = () => {
+        setVisibleTweetModal(false);
+    }
 
     return (
         <Container>
@@ -40,12 +50,17 @@ const Home = () => {
                             <TwitterIcon className={classes.logoIcon} />
                         </IconButton>
                         <SideMenu classes={classes} />
-                        <Button className={classes.sideButton} variant="contained" color="primary" fullWidth>
+                        <Button onClick={handleOpenTweetPopup} className={classes.sideButton} variant="contained" color="primary" fullWidth>
                             <Hidden smDown>Tweet</Hidden>
                             <Hidden mdUp>
                                 <CreateIcon />
                             </Hidden>
                         </Button>
+                        <ModelBlock title='Create tweet' visible={visibleTweetModal} onClose={handleCloseTweetPopup} >
+                            <div className={classes.addTweetPopup}>
+                                <AddTweetForm classes={classes} />
+                            </div>
+                        </ModelBlock>
                     </div>
                 </Grid>
                 <Grid item xs={8} sm={8} md={6}>
