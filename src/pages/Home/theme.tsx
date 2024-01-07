@@ -88,6 +88,11 @@ export const useHomeStyles = makeStyles((theme) => ({
     tweetSpan: {
         color: grey[500],
     },
+    tweetsProgress: {
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '20px 0',
+    },
     addForm: {
         padding: 20,
     },

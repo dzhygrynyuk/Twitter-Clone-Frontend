@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
     Container,
@@ -15,7 +16,8 @@ import {
     ListItem,
     ListItemText,
     Divider,
-    ListItemAvatar
+    ListItemAvatar,
+    CircularProgress
 } from "@material-ui/core";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import CreateIcon from '@material-ui/icons/Create';
@@ -29,9 +31,19 @@ import { SearchTextFields } from "../../components/SearchTextFields";
 import { ModelBlock } from "../../components/ModalBlock";
 import { useHomeStyles } from "./theme";
 
+import { fetchTweets } from "../../store/ducks/tweets/actionCreators";
+import { selectIsTweetsLoading, selectTweetsItems } from "../../store/ducks/tweets/selectors";
+
 const Home = () => {
     const classes = useHomeStyles();
+    const dispatch = useDispatch();
     const [visibleTweetModal, setVisibleTweetModal] = React.useState(false);
+    const tweets = useSelector(selectTweetsItems);
+    const isLoading = useSelector(selectIsTweetsLoading);
+
+    React.useEffect(() => {
+        dispatch(fetchTweets());
+    }, []);
 
     const handleOpenTweetPopup = () => {
         setVisibleTweetModal(true);
@@ -72,17 +84,15 @@ const Home = () => {
                             <AddTweetForm classes={classes} />
                             <div className={classes.addFormBottomLine}></div>
                         </Paper>
-                        {[...new Array(20).fill(
-                            <Tweet 
-                                text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti?'
-                                user={{
-                                    fullname: 'Remy Sharp',
-                                    username: 'sharp_remy',
-                                    avatarUrl: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
-                                }}
-                                classes={classes}
-                            />
-                        )]}
+                        {isLoading ? (
+                            <div className={classes.tweetsProgress}>
+                                <CircularProgress />
+                            </div>
+                        ) : (
+                            tweets.map(tweet => (
+                                <Tweet key={tweet._id} text={tweet.text} user={tweet.user} classes={classes} />
+                            ))
+                        )}
                     </Paper>
                 </Grid>
                 <Grid item xs={3} sm={3} md={3}>
